@@ -393,6 +393,88 @@
 # employee.update_promotion(5)
 # print(employee.eligibility())
 
+'''Q4. Build a Loan class that:
+•	Has a common interest rate for all loans.
+•	Each object stores borrower name and principal.
+•	Calculates total payable amount.
+•	Provides a function to update the interest rate.
+•	Provides a static function to check loan eligibility (e.g., salary > certain threshold).
+Demonstrate:
+1.	Creating multiple loan accounts.
+2.	Updating interest rates.
+3.	Checking eligibility and total repayment for borrowers.
+'''
+
+# class Loan:
+#     c_intrest_rate = 0.05
+#     def __init__(self, borrower_name, principal):
+#         self.borrower_name = borrower_name
+#         self.principal = principal
+#     def total_repayment(self):
+#         return (1+Loan.c_intrest_rate) * self.principal
+#     @classmethod
+#     def update_intrest_rate(cls,new_interest_rate):
+#         cls.c_intrest_rate = new_interest_rate
+#     @staticmethod
+#     def check_eligibility(salary, threshold=20000):
+#         if  salary > threshold:
+#             return "eligible for loan"
+# b1=Loan("Borrower",10000)
+# k=b1.total_repayment()
+# print("----loan details----")
+# print(k)
+# print("interest rate:",Loan.c_intrest_rate)
+# print("total repayment:",b1.total_repayment())
+# Loan.update_intrest_rate(1)
+# print("updated interest rate:",Loan.c_intrest_rate)
+# print(b1.check_eligibility(30000))
+
+'''. Create a class Course that:
+•	Tracks total courses created.
+•	Each course has a title, duration, and enrolled_students.
+•	Provides a method to enroll a new student.
+•	Allows updating the minimum duration for a valid course across all instances.
+•	Has a static function to check if a given duration is realistic (not negative, not too large).
+Demonstrate:
+1.	Creating multiple courses.
+2.	Enrolling students.
+3.	Updating minimum duration and checking durations.
+'''
+#
+# class Course:
+#     total_courses = 0
+#     minimum_duration = 10
+#     def __init__(self, title, duration):
+#         self.title = title
+#         self.duration = duration
+#         self.enrolled_students = []
+#         Course.total_courses += 1
+#     def enroll(self,student_name, course_name, student_age):
+#         self.enrolled_students.append(student_name)
+#         print(f"student {student_name} enrolled {self.title} course{course_name} with age {student_age}")
+#     @classmethod
+#     def update_minimum_duration(cls,minimum_duration):
+#        cls.minimum_duration = minimum_duration
+#     @staticmethod
+#     def given_duration(duration):
+#         if duration > 0:
+#             return "duration is valid to enroll"
+#         else:
+#             return "not a valid duration"
+# course1 = Course("python programming",5)
+# course2 = Course("java programming",10)
+# course1.enroll("karthik","python",23)
+# course1.enroll("naveen","python",23)
+# course2.enroll("srinu","java",23)
+# course2.enroll("navadeep","java",23)
+# print("-----enrollment-----")
+# print("For course1 enrolled students:",course1.enrolled_students)
+# print("For course2 enrolled students:",course2.enrolled_students)
+# print("---duration----")
+# print(course1.given_duration(10))
+# print(course2.given_duration(8))
+# course1.update_minimum_duration(11)
+# print(Course.minimum_duration)
 
 
 
