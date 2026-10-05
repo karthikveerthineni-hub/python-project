@@ -1,0 +1,73 @@
+DDL = Data Definition Language
+
+DDL commands are used to create, modify, and delete the structure of database
+ objects, such as tables and databases.
+
+-----Main DDL Commands----
+
+Command	Purpose
+
+--CREATE	: Creates a database/table
+--ALTER	    : Modifies an existing table
+--DROP	    : Deletes a table/database
+--TRUNCATE	: Removes all records from a table
+--RENAME	: Renames a database object
+
+CREATE DATABASE DDL;
+USE DDL;
+CREATE table
+      EMP(
+      ID INT,
+      NAME varchar(50),
+      COUNTRY VARCHAR(50),
+      SCORE INT,
+      BRANCH VARCHAR(50)
+      );
+      
+select *FROM EMP;      
+
+ALTER TABLE EMP 
+	ADD SALARY INT;
+    
+ALTER TABLE EMP
+MODIFY NAME VARCHAR(100);
+
+ALTER TABLE EMP
+   RENAME COLUMN NAME TO EMP_NAME;  
+
+truncate TABLE EMP;  
+
+DROP TABLE EMP;
+
+CREATE TABLE EMPS(
+    ID INT NOT NULL,
+    NAME VARCHAR(50) NOT NULL,
+    EMAIL VARCHAR(50),
+    DEPARTMENT VARCHAR(50),
+    JOINING_DATE date
+    );
+select *FROM EMP;
+
+select *FROM EMPS;
+
+ALTER TABLE EMPS 
+ADD COLUMN PHONE_NUMBER VARCHAR(50);
+    
+ALTER TABLE EMPS
+RENAME COLUMN DEPARTMENT TO BRANCH;    
+
+
+ALTER TABLE EMPS 
+DROP COLUMN PHONE_NUMBER;
+
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    department VARCHAR(50) DEFAULT 'IT',
+    salary DECIMAL(10,2) CHECK (salary > 10000),
+    joining_date DATE
+);
+
+SELECT *FROM employee;

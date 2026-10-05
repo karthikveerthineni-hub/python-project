@@ -1,0 +1,61 @@
+DML in SQL
+
+DML = Data Manipulation Language
+
+DML is used to insert, modify, and delete data inside existing tables.
+
+--Main DML commands--
+Command	Purpose
+
+INSERT	: Add new records
+UPDATE	: Modify existing records
+DELETE	: Remove records
+
+
+
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    department VARCHAR(50) DEFAULT 'IT',
+    salary DECIMAL(10,2) CHECK (salary > 10000),
+    joining_date DATE
+);
+
+SELECT *FROM employee;
+
+INSERT INTO employee
+VALUES (1,"KARTHIK","KARTHIKVEERTHINENI@GMAIL.COM","CSE",50000,"2026-10-04");
+
+
+INSERT INTO employee
+VALUES
+(2, 'Rahul', 'HR@GMAIL.COM',"HR", 25000,"2022-10-22");
+
+UPDATE employee
+SET DEPARTMENT="CSE",
+SALARY = 100000
+WHERE ID = 1;
+
+DELETE FROM EMPLOYEE
+WHERE ID =2;
+
+
+
+INSERT INTO employee
+VALUES (3,"SRINU","SRINU@GMAIL.COM","ECE",20000,"2025-10-09"),
+(4,"NAVEEN","NAVEEN@GMAIL.COM","ECE",60000,"2022-10-09");
+
+UPDATE employee
+SET SALARY = 40000
+WHERE ID =3;
+
+
+SELECT *FROM employee WHERE SALARY > 40000;
+
+DELETE FROM employee
+WHERE DEPARTMENT="ECE";
+
+ALTER TABLE employee
+DROP COLUMN JOINING_DATE;
