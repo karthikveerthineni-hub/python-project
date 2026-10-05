@@ -1,0 +1,61 @@
+CREATE DATABASE company_db;
+USE company_db;
+CREATE TABLE company (
+    id INT PRIMARY KEY,
+    country VARCHAR(50),
+    score INT,
+    branch VARCHAR(50),
+    employee VARCHAR(100)
+);
+INSERT INTO company (id, country, score, branch, employee)
+VALUES
+(1, 'India', 85, 'IT', 'Rahul'),
+(2, 'USA', 90, 'HR', 'John'),
+(3, 'UK', 78, 'Finance', 'David'),
+(4, 'India', 92, 'IT', 'Karthik'),
+(5, 'Canada', 88, 'Sales', 'Mike');
+
+select * from company;
+select country,score from company;
+select distinct country from company;
+select *from company where score>80;
+select *from company where score>80 and country = "India";
+select  *from company where country= "India" or "USA";
+CREATE TABLE comp (
+    id INT PRIMARY KEY,
+    country VARCHAR(50),
+    score INT,
+    branch VARCHAR(50),
+    employee VARCHAR(100)
+);
+INSERT INTO comp (id, country, score, branch, employee)
+VALUES
+(1, 'India', 85, 'IT', 'Rahul'),
+(2, 'USA', 90, 'HR', 'John'),
+(3, 'UK', 78, 'Finance', 'David'),
+(4, 'India', 92, 'IT', 'Karthik'),
+(5, 'Canada', 88, 'Sales', 'Mike');
+
+select country,count(*) as no_of from comp group by country;
+
+select country,max(score) as maximum from comp group by country;
+
+select country,min(score) as minimum from comp group by country;
+
+select country,avg(score) as avg_score from comp group by country;
+
+select country,sum(score) as sum_score from comp group by country;
+
+select country,sum(score) as sum_score from comp group by country having sum_score > 80;
+
+select country,sum(score) as sum_score from comp group by country having sum_score > 80 order by sum_score;
+
+select country,sum(score) as sum_score from comp group by country having sum_score > 80 order by sum_score desc;
+
+select *from comp;
+
+select country,avg(score) from comp group by country;
+
+select branch,count(*) as ad,sum(score) as sum_s from comp where score > 70 group by branch having sum_s>80 order by sum_s;
+
+
