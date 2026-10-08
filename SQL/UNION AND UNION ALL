@@ -1,0 +1,108 @@
+create DATABASE UNI;
+USE UNI;
+CREATE TABLE employees_2025 (
+    emp_id INT,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2)
+);
+
+INSERT INTO employees_2025 VALUES
+(101, 'Ravi', 'IT', 50000),
+(102, 'Kiran', 'HR', 45000),
+(103, 'Sita', 'Finance', 55000),
+(104, 'Arun', 'IT', 60000),
+(105, 'Priya', 'Sales', 48000);
+
+SELECT *FROM employeeS_2025;
+
+CREATE TABLE employees_2026 (
+    emp_id INT,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2)
+);
+
+INSERT INTO employees_2026 VALUES
+(104, 'Arun', 'IT', 60000),
+(105, 'Priya', 'Sales', 48000),
+(106, 'Rahul', 'HR', 52000),
+(107, 'Anjali', 'Finance', 58000),
+(108, 'Vijay', 'IT', 65000);
+
+SELECT *FROM employeeS_2026;
+
+SELECT *FROM employeeS_2025
+UNION
+SELECT *FROM employeeS_2026;
+
+
+SELECT EMP_NAME FROM employeeS_2025
+UNION ALL
+SELECT EMP_NAME FROM employeeS_2026;
+
+SELECT EMP_ID,EMP_NAME FROM employeeS_2025
+UNION
+SELECT EMP_ID,EMP_NAME FROM employeeS_2026;
+
+
+
+SELECT EMP_ID,EMP_NAME,   department FROM employeeS_2025 WHERE  department='IT'
+UNION
+SELECT EMP_ID,EMP_NAME,   department FROM employeeS_2026 WHERE department = 'IT';
+
+
+ 
+SELECT EMP_ID,EMP_NAME,   department FROM employeeS_2025 WHERE  department='HR'
+UNION 
+SELECT EMP_ID,EMP_NAME,   department FROM employeeS_2026 WHERE department = 'HR';
+
+ 
+SELECT EMP_ID,EMP_NAME,  department,salary FROM employeeS_2025 WHERE   salary>50000
+UNION 
+SELECT EMP_ID,EMP_NAME,   department,salary FROM employeeS_2026 WHERE  salary>50000;
+
+SELECT EMP_ID,EMP_NAME,  department,salary FROM employeeS_2025 WHERE   salary>45000 AND  salary<55000
+UNION 
+SELECT EMP_ID,EMP_NAME,   department,salary FROM employeeS_2026 WHERE  salary>45000 AND  salary<55000;
+
+SELECT department FROM employeeS_2025 
+UNION 
+SELECT  department FROM employeeS_2026;
+
+SELECT department, emp_name FROM employeeS_2025 WHERE department = 'Finance'
+UNION ALL
+SELECT  department, emp_name FROM employeeS_2026 WHERE department = 'Finance';
+
+SELECT SUM(SALARY),DEPARTMENT FROM employeeS_2025 group by DEPARTMENT
+UNION 
+SELECT SUM(SALARY),DEPARTMENT FROM employeeS_2026 group by DEPARTMENT ORDER BY DEPARTMENT;
+
+select DEPARTMENT FROM employeeS_2025
+UNION 
+select DEPARTMENT FROM employeeS_2026 ORDER BY DEPARTMENT;
+
+select EMP_NAME,SALARY FROM employeeS_2025 WHERE SALARY >50000
+UNION
+select  EMP_NAME,SALARY FROM employeeS_2026 WHERE SALARY >50000;
+
+select EMP_NAME,SALARY,DEPARTMENT FROM employeeS_2025 WHERE DEPARTMENT ='IT'
+UNION ALL
+select  EMP_NAME,SALARY,DEPARTMENT FROM employeeS_2026 WHERE  DEPARTMENT ='HR';
+
+
+select EMP_NAME,SALARY,DEPARTMENT,2025 AS YEAR FROM employeeS_2025 
+UNION ALL
+select  EMP_NAME,SALARY,DEPARTMENT,2026 AS YEAR FROM employeeS_2026;
+
+
+SELECT e25.emp_id, e25.emp_name
+FROM employees_2025 e25
+INNER JOIN employees_2026 e26
+    ON e25.emp_id = e26.emp_id;
+
+SELECT e25.*
+FROM employees_2025 e25
+LEFT JOIN employees_2026 e26
+    ON e25.emp_id = e26.emp_id
+WHERE e26.emp_id IS NULL;
