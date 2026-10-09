@@ -1,0 +1,98 @@
+----STRING FUNCTIONS IN SQL----
+1. UPPER() – Converts a string into uppercase. Example: UPPER('karthik') → KARTHIK
+
+2. LOWER() – Converts a string into lowercase. Example: LOWER('SQL') → sql
+
+3. LENGTH() – Returns the length of a string in bytes. Example: LENGTH('Hello') → 5
+
+4. CHAR_LENGTH() – Returns the number of characters in a string. Example: CHAR_LENGTH('Hello') → 5
+
+5. CONCAT() – Combines two or more strings into a single string. Example: CONCAT('Kar', 'thik') → Karthik
+
+6. SUBSTRING() – Extracts a portion of a string. Example: SUBSTRING('Karthik', 1, 3) → Kar
+
+7. TRIM() – Removes leading and trailing spaces from a string. Example: TRIM(' SQL ') → SQL
+
+8. REPLACE() – Replaces occurrences of a specified substring with another substring. Example: REPLACE('banana', 'a', '@') → b@n@n@
+
+create database stringfun;
+use stringfun;
+CREATE DATABASE sql_functions_practice;
+USE sql_functions_practice;
+
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2),
+    joining_date DATE,
+    city VARCHAR(30),
+    bonus DECIMAL(10,2)
+);
+
+INSERT INTO Employees VALUES
+(1, 'Karthik', 'IT', 45000, '2023-01-15', 'Guntur', 5000),
+(2, 'Ravi', 'HR', 35000, '2022-06-10', 'Hyderabad', NULL),
+(3, 'Priya', 'IT', 60000, '2021-03-20', 'Chennai', 8000),
+(4, 'Anu', 'Finance', 50000, '2024-02-01', 'Guntur', 4000),
+(5, 'Rahul', 'HR', 30000, '2023-09-12', 'Hyderabad', 2000),
+(6, 'Sneha', 'IT', 75000, '2020-11-05', 'Bangalore', NULL),
+(7, 'Arjun', 'Finance', 40000, '2022-12-18', 'Chennai', 3000),
+(8, 'Divya', 'IT', 55000, '2024-07-22', 'Guntur', 6000);
+
+
+select *from Employees;
+
+select emp_name,upper(emp_name) as upper_name from employees;
+
+select emp_name,lower(emp_name) as lower_name from employees;
+
+select emp_name,trim(emp_name) as trim_name from employees;
+
+select emp_name,length(emp_name) as len_name from employees;
+
+select emp_name,upper(emp_name) as upper_name from employees;
+
+select emp_name,substring(emp_name,1,3) as upper_name from employees;
+
+select department,replace( department,'IT','cse') as d_name from employees;
+
+
+select emp_name,locate('r',emp_name) as locate_name from employees;
+
+select emp_name,department, concat(department," ",emp_name) as concate_name from employees;
+
+select emp_name,department, concat("hello"," ",department," ",emp_name) as concate_name from employees;
+
+
+select emp_name,department, concat("hello","--- ",department,"-- ",emp_name) as concate_name from employees;
+
+select emp_name,length(trim(emp_name)) as no_of from employees;
+
+select emp_name,concat(upper(left(emp_name,1)),lower(substring(emp_name,2))) as u_name from employees;
+
+select emp_name from employees where length(emp_name)>5;
+
+select emp_name,replace(emp_name," ","-") as trim_name from employees;
+
+select emp_name,concat(upper(left(emp_name,3)),lower(substring(emp_name,4))) as name_upperlower from employees;
+
+SELECT LOWER(TRIM(emp_name)) AS normalized_name,count(*) as total
+FROM Employees group by normalized_name;
+
+SELECT emp_name
+FROM Employees
+WHERE LOWER(TRIM(emp_name)) LIKE '%n';
+
+select emp_name,length(trim(emp_name)) as len from employees where length(trim(emp_name))=5;
+
+select emp_name,lower(replace(emp_name,'a','@')) as replace_lower from employees;
+
+select emp_name,char_length(emp_name) as len from employees where char_length(emp_name) = 5;
+
+select emp_name,concat(left(emp_name,1),repeat('*',length(emp_name)-2),right(emp_name,1)) from employees where length(emp_name) >2;
+
+SELECT emp_name
+FROM Employees
+WHERE LOWER(LEFT(TRIM(emp_name), 1)) =
+      LOWER(RIGHT(TRIM(emp_name), 1));
