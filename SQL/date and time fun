@@ -1,0 +1,101 @@
+SQL time and date functions to practice
+Function	               Purpose
+NOW()               ---	   Current date and time
+CURDATE()           ---	   Current date
+CURTIME()	        ---    Current time
+YEAR(joining_date)	----   Extract year
+MONTH(joining_date)	----   Extract month
+DAY(joining_date)	-----  Extract day
+HOUR(login_time)	-----  Extract hour
+MINUTE(login_time)	----   Extract minute
+SECOND(login_time)	---    Extract second
+DATEDIFF()	        ---    Difference between dates in days
+DATE_ADD()	      ---      Add an interval to a date
+DATE_SUB()	       ----    Subtract an interval from a date
+TIMEDIFF()	       -----   Difference between time values
+DATE_FORMAT()	   -----   Format a date as text
+
+create database number;
+use number;
+select 3.196,round(3.196,2) as round_2,
+round(3.196,1) as round_1,
+round(3.196,0) as round_0;
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    joining_date DATE,
+    login_time TIME,
+    login_datetime DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO employees
+(emp_id, emp_name, joining_date, login_time, login_datetime)
+VALUES
+(1, 'Karthik', '2024-01-15', '09:30:00', '2024-01-15 09:30:00'),
+(2, 'Rahul', '2023-06-20', '10:15:00', '2023-06-20 10:15:00'),
+(3, 'Priya', '2022-11-10', '08:45:00', '2022-11-10 08:45:00'),
+(4, 'Arun', '2025-03-05', '11:00:00', '2025-03-05 11:00:00'),
+(5, 'Sneha', '2021-08-25', '09:00:00', '2021-08-25 09:00:00');
+
+select *from employees;
+
+select emp_id,created_at,curdate() as today from employees;
+
+select now();
+
+select curtime();
+
+SELECT emp_name, year(joining_date) AS joining_year
+FROM employees;
+
+
+SELECT emp_name, month(joining_date) AS joining_month
+FROM employees;
+
+SELECT emp_name,day(joining_date) AS joining_day
+FROM employees;
+
+
+SELECT emp_name,day(joining_date) AS joining_day,month(joining_date) AS joining_month,year(joining_date) AS joining_year
+FROM employees;
+
+SELECT
+    emp_name,
+    HOUR(login_time) AS login_hour,
+    MINUTE(login_time) AS login_minute,
+    SECOND(login_time) AS login_second
+FROM employees;
+
+SELECT DATEDIFF('2024-01-20', '2024-01-15') AS days_difference;
+
+SELECT
+    emp_name,
+    DATEDIFF(CURDATE(), joining_date) AS days_since_joining
+FROM employees;
+
+SELECT DATE_ADD('2024-01-15', INTERVAL 10 DAY) AS new_date;
+
+SELECT DATE_ADD('2024-01-15', INTERVAL 2 MONTH) as new_month;
+
+SELECT DATE_ADD('2024-01-15', INTERVAL 1 YEAR) as new_date;
+
+SELECT DATE_SUB('2024-01-15', INTERVAL 5 DAY) AS previous_date;
+
+SELECT TIMEDIFF('18:30:00', '09:30:00') AS time_difference;
+
+SELECT DATE_FORMAT('2024-01-15', '%d-%m-%Y') AS formatted_date;
+
+
+select emp_name,year(joining_date) as joining_year from employees;
+
+select emp_name, year(joining_date) as joining_year from employees where year(joining_date) = '2024';
+
+
+select emp_name,month(joining_date) as joining_date from employees ;
+
+
+select emp_name,month (joining_date) as joining_date from employees where month(joining_date)='11';
+
+select emp_name,date_add(joining_date, interval 30 day) as joining from employees;
+
+select emp_name,datediff(now(),joining_date) as  difference from employees;
