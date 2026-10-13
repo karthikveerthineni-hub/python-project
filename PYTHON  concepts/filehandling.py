@@ -2,12 +2,12 @@
  to open a text file in read mode,
  read the entire content using read(),
  and print the number of characters in the file.'''
-#
-# with open("test.txt","r") as f:
-#     print(f.read())
-#     f.seek(0)
-#     d=f.read()
-#     print("no of characters:",len(d))
+
+with open("test.txt","r") as f:
+    print(f.read())
+    f.seek(0)
+    d=f.read()
+    print("no of characters:",len(d))
 
 ''' Write a program that opens a file using 
 a context manager, reads all lines using readlines(), 

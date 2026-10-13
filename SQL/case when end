@@ -1,0 +1,129 @@
+CREATE DATABASE sql_practice;
+USE sql_practice;
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2),
+    experience INT
+);
+INSERT INTO Employees
+(emp_id, emp_name, department, salary, experience)
+VALUES
+(1, 'Ravi', 'IT', 60000, 3),
+(2, 'Priya', 'HR', 35000, 2),
+(3, 'Arun', 'IT', 80000, 7),
+(4, 'Sneha', 'Sales', 45000, 4),
+(5, 'Kiran', 'HR', 25000, 1),
+(6, 'Divya', 'Sales', 70000, 6),
+(7, 'Rahul', 'IT', 40000, 2),
+(8, 'Meena', 'Finance', 90000, 8),
+(9, 'Vijay', 'Finance', 30000, 1),
+(10, 'Anu', 'Sales', 55000, 5);
+
+SELECT * FROM Employees;
+
+select emp_name,salary ,
+case 
+	when salary>60000 then 'high'
+    else 'low'
+end as h_salary
+from employees;
+
+select emp_name,salary,
+case 
+	when salary>70000 then 'excellent'
+    when salary > 40000 then  'high'
+    else 'poor'
+end as h_salary
+from employees;
+
+select emp_name,experience,
+case 
+	when experience>5 then 'senior'
+    when (experience<4 and experience >2) then  'Junior'
+    else 'fresher'
+end as h_experience
+from employees;
+
+
+select emp_name ,department,
+case 
+when department = 'it' then 'technical'
+else 'non technical'
+end as department_type
+from employees; 
+
+
+select department,sum(salary) as total_salary,sum(salary_de) as  bonus_amount from (
+select department,salary,
+case when department = 'it' then salary * 0.5
+when department = 'hr'then salary * 0.3
+when department = 'sales' then salary * 0.4
+else salary * 0.2
+end 
+as salary_de
+from employees) as e
+group by department order by bonus_amount desc;
+
+select department,  
+sum(case 
+when experience>3 then 1
+else 0
+end) as total_e,
+count(*) as emp
+from employees group by department order by emp;
+
+
+select department,salary,
+case 
+when salary > 50000 then 'high'
+else 'low'
+end as emp_salary,
+sum(salary) over() salary_sum
+from employees;
+
+select department,
+sum(case when salary >=50000 then 1 else 0 end )
+as high_salary,
+count(*) as high,
+sum(case when salary <50000 then 1 else 0 end )
+as low_salary,
+count(*) as low
+from employees group by department;
+
+SELECT
+    department,
+    SUM(
+        CASE
+            WHEN salary > 50000 THEN salary
+            ELSE 0
+        END
+    ) AS high_salary_total
+FROM Employees
+GROUP BY department;
+
+SELECT
+    emp_name,
+    salary,
+    CASE
+        WHEN salary > (SELECT AVG(salary) FROM Employees)
+            THEN 'Above Average'
+        WHEN salary < (SELECT AVG(salary) FROM Employees)
+            THEN 'Below Average'
+        ELSE 'Average'
+    END AS salary_status
+FROM Employees;
+
+SELECT
+    emp_name,
+    department,
+    salary,
+    SUM(
+        CASE
+            WHEN salary > 50000 THEN salary
+            ELSE 0
+        END
+    ) OVER (PARTITION BY department) AS dept_high_salary_total
+FROM Employees;
+   
